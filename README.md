@@ -1,5 +1,10 @@
 # CyRic Dotfiles
 
-1. Install oh-my-zsh
+My personal simple dot files for configuring the following:
+- iTerm
+- vim
+- zsh
+- aliases
+- brew
 
 
