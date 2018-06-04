@@ -7,4 +7,3 @@ My personal simple dot files for configuring the following:
 - aliases
 - brew
 
-
