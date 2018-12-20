@@ -2,7 +2,7 @@
 
 My personal dotfiles :rocket:
 
-```bash
+```text
                    -`
                   .o+`                   cyric@anaga
                  `ooo/                   ~~~~~~~~~~~
@@ -23,3 +23,9 @@ My personal dotfiles :rocket:
  `++:.                           `-/+/
  .`                                 `/
 ```
+
+![Desktop screnshot](https://raw.githubusercontent.com/mariocao/dotfiles/master/images/desktop.png)
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
