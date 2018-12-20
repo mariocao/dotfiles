@@ -1,0 +1,434 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+######################################
+############## GLOBALS ###############
+######################################
+
+# Default applications
+set $term termite 
+set $fm thunar
+set $browser google-chrome-stable
+set $lockapp blurlock
+
+# Default modkey
+set $mod Mod4
+
+# Hide titlebar
+new_window pixel
+
+# i3-gaps
+gaps inner 10
+# gaps outer 2
+
+# Font for window titles.
+font pango: SauceCodePro Nerd Font Black 11
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+
+######################################
+############### COLORS ###############
+######################################
+
+### Defining colors {{{
+
+set $black #261a18
+set $white #ffffff
+set $grey1 #dddddd
+set $grey2 #888888
+set $dark #333333
+
+set $elegant #00002c99
+set $silver  #e4e4e499
+
+set $red #d0253d
+set $orange  #ff8700
+set $yellow #fec418
+set $blue #0088CC
+set $purple #815ba4
+set $pink #fa00ab
+set $green #38fc48
+
+# Set some nice colors     border   background  text	  indicator
+# client.focused             $red     $red        $white    $pink   
+# client.focused_inactive    $orange  $orange     $elegant  $elegant  
+# client.unfocused           $red     $elegant    $silver   $pink   
+# client.urgent              $purple  $pink       $elegant  $pink    
+# client.placeholder         $elegant $elegant    $silver   $elegant  
+# client.background          $elegant
+client.focused             $blue    $blue       $white    $grey1
+client.focused_inactive    $dark    $dark       $grey2    $dark
+client.unfocused           $black    $dark       $grey2    $dark
+client.urgent              $orange  $orange     $white    $red
+client.placeholder         $dark    $dark       $white    $dark
+client.background          $dark
+### }}}
+
+
+##########################################
+############### MONITORS ###############
+##########################################
+
+### Monitors
+set $intern eDP1
+# set $extern HDMI2
+set $extern DP1
+
+# Startup
+exec_always --no-startup-id xrandr --output $extern --primary --auto --right-of $intern
+
+# Monitor mode
+set $mode_external_pos External screen on (l)eft, (r)ight, (u)p, (d)own or (c)lone (uppercase for intern primary)
+mode "$mode_external_pos" {
+
+  # right
+  bindsym r exec xrandr --output $extern --primary --auto --right-of $intern; mode "default"
+  bindsym Shift+r exec xrandr --output $intern --primary --auto --right-of $extern; mode "default"
+
+  # left
+  bindsym l exec xrandr --output $extern --primary --auto --left-of $intern; mode "default"
+  bindsym Shift+l exec xrandr --output $intern --primary --auto --left-of $extern; mode "default"
+
+  # up and down
+  bindsym u exec --no-startup-id xrandr --output $intern --auto --output $extern --auto --above $intern ; mode "default"
+  bindsym d exec --no-startup-id xrandr --output $intern --auto --output $extern --auto --below $intern ; mode "default"
+
+  # clone
+  bindsym c exec --no-startup-id xrandr --output $intern --auto --output $extern --auto --same-as $intern ; mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m mode "$mode_external_pos"
+
+##########################################
+############### WORKSPACES ###############
+##########################################
+
+# define names for workspaces
+# Some available icons:
+#         
+#      λ    
+
+set $ws1    "1:  Web "
+set $ws2    "2:  Code "
+set $ws3    "3:  Term "
+set $ws4    "4:  Dev "
+set $ws5    "5:  Git "
+set $ws6    "6:  Misc "
+set $ws7    "7:  Media "
+set $ws8    "8:  Random "
+set $ws9    "9:  Chat "
+set $ws0    "10:  Priv "
+
+### workspaces  {{{
+workspace $ws1 output $intern
+workspace $ws2 output $extern
+workspace $ws3 output $intern
+workspace $ws4 output $extern
+workspace $ws5 output $intern
+workspace $ws6 output $extern
+workspace $ws7 output $intern
+workspace $ws8 output $extern
+workspace $ws9 output $intern
+workspace $ws0 output $extern
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws0
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0; workspace $ws0
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+#move workspace to the next output
+bindsym $mod+shift+n move workspace to output right
+
+#navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+
+########################################
+############### BINDINGS ###############
+########################################
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+bindsym $mod+Ctrl+q --release exec --no-startup-id xkill
+
+# Start rofi
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+Tab exec rofi -show window
+
+bindsym $mod+F2 exec $browser
+bindsym $mod+F3 exec $fm
+bindsym $mod+Shift+F3 exec gksu $fm
+bindsym $mod+F4 exec ranger
+bindsym $mod+F5 exec $term -e 'mocp'
+bindsym $mod+F6 exec --no-startup-id boostnote
+
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+### }}}
+
+# # change focus
+# bindsym $mod+h focus left
+# bindsym $mod+j focus down
+# bindsym $mod+k focus up
+# bindsym $mod+l focus right
+
+# # move focused window
+# bindsym $mod+Shift+h move left
+# bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+k move up
+# bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+t split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# empty window
+bindsym $mod+backslash open
+
+# focus the parent container
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# # Show the next scratchpad window or hide the focused scratchpad window.
+# # If there are multiple scratchpad windows, this command cycles through them.
+# bindsym $mod+minus scratchpad show
+bindsym $mod+minus [instance="^(.(?<!keepassxc))*?$"] scratchpad show
+
+# KeePassXC scratchpad
+for_window [class="keepassxc"] move scratchpad
+bindsym $mod+equal [class="keepassxc"] scratchpad show
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Lock screen
+bindsym $mod+Shift+z exec --no-startup-id blurlock
+
+### Resize window (you can also use the mouse for that) {{{
+mode "resize"
+{
+        # Resize with the arrow keys
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
+
+        # Back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+### }}}
+
+# Set shut down, restart and locking features
+bindsym $mod+Shift+e mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    #bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+########################################
+################ SOUND #################
+########################################
+
+# exec --no-startup-id volumeicon
+# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+# bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 10+ unmute"
+# bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 10- unmute"
+# bindsym XF86AudioMute exec "amixer -D pulse sset Master toggle -q"
+# bindsym XF86AudioMute exec amixer -c 0 -D pulse set Master 1+ toggle
+# bindsym XF86AudioRaiseVolume exec amixer -c 0 set Master 2dB+ unmute
+# bindsym XF86AudioLowerVolume exec amixer -c 0 set Master 2dB- unmute
+
+
+########################################
+################# XF86 #################
+########################################
+
+# Start dunst instead of xfce4-notifyd
+exec --no-startup-id dunst -c $HOME/.config/dunst/launch
+
+### extra XF86 keys {{{
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master '5%+' && notify-send --expire-time=2000 "Volume Up"  -i audio-volume-high
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master '5%-' && notify-send --expire-time=2000 "Volume Down"  -i audio-volume-low
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master 'toggle' && notify-send --expire-time=2000 "Volume Toggle"  -i audio-volume-muted
+
+# requires xorg-xbacklight from aur
+bindsym XF86MonBrightnessUp exec (notify-send --expire-time=2000 "Brightness" -h int:value:$(xbacklight -inc 10 && xbacklight -get) -h string:synchronous: -i weather-clear)
+bindsym XF86MonBrightnessDown exec (notify-send --expire-time=2000 "Brightness" -h int:value:$(xbacklight -dec 10 && xbacklight -get) -h string:synchronous: -i weather-clear)
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86Search		exec $browser https://google.com/nr
+bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
+bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
+# bindsym XF86Suspend		exec --no-startup-id ~/.config/i3/lock.sh
+bindsym XF86Suspend		  exec --no-startup-id $lockapp
+bindsym XF86Explorer    exec --no-startup-id $fm
+### }}}
+
+
+################################################
+################# STARTUP APPS #################
+################################################
+
+### Startup programs {{{
+# Config
+exec_always --no-startup-id feh --bg-scale ~/.wallpapers/cyber1.jpg
+exec --no-startup-id compton -f # Compositor for window transparency
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager # To monitor batttery
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec --no-startup-id clipit
+#exec --no-startup-id pa-applet
+#exec --no-startup-id pulseaudio --start
+# Custom config
+exec --no-startup-id "setxkbmap -model pc105 -layout us,es -option grp:alt_space_toggle"
+# Conky
+exec --no-startup-id conky -c ~/.config/i3/conky/stats
+exec --no-startup-id conky -c ~/.config/i3/conky/shortcuts
+# Others
+exec --no-startup-id dropbox
+# My Apps
+exec --no-startup-id "sh -c 'sleep 10; exec telegram-desktop'"
+exec --no-startup-id "sh -c 'sleep 10; exec discord'"
+exec --no-startup-id "sh -c 'sleep 15; exec keepassxc'"
+# Alt tab (disabled because I use rofi window instead)
+# exec_always alttab -frame "#ff8700" -font "xft:SauceCodePro Nerd Font Black" -d 2 -bg "#261a18" -fg "#d0253d"
+### }}}
+
+
+########################################
+################# BARS #################
+########################################
+
+### Bar programs {{{
+# Start i3blocks to display a workspace bar
+# bar
+# {
+# 	position top
+# 	status_command i3blocks
+#         i3bar_command i3bar -t
+# 	font pango: SauceCodePro Nerd Font Black 10	
+# 	colors
+# 	{
+#                                     # Border  # Background # Text
+# 		focused_workspace   $elegant  $elegant  $red
+# 		active_workspace    $elegant  $elegant  $orange
+# 		inactive_workspace  $elegant  $elegant 	$silver
+# 		urgent_workspace    $elegant  $elegant  $orange
+# 		background          $elegant
+#     	}
+# }
+### }}}
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch
+
+
+###############################################
+################# CONFIG APPS #################
+###############################################
+
+# focus, floating, & sticky
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+for_window [window_role="(?i)(?:pop-up|setup)"] floating enable
+for_window [class="Pamac-updater"] floating enable
+
+# Apps assigned to workspaces
+# assign [class="Google-chrome"] $ws1
+assign [class="Code"] $ws2
+assign [class="Electron"] $ws4
+assign [class="GitKraken"] $ws5
+assign [class="TelegramDesktop"] $ws9
+assign [class="discord"] $ws9

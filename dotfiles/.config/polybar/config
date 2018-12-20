@@ -1,0 +1,485 @@
+####################### COLORS #######################
+[colors]
+# black = #88000000
+# black = #222
+# white = #ddd
+
+# dark = #444444
+# orange = #ffa07a
+# yellow = #fec418
+# red = #d0253d
+# dark.red = #49262B
+# green = #38fc48
+# pink = #fa00ab
+# blue = #0de0fc
+# purple = #c476f1
+
+black = #261a18
+white = #ffffff
+grey1 = #dddddd
+grey2 = #888888
+dark = #333333
+
+red = #d0253d
+orange  = #ff8700
+yellow = #fec418
+light.blue = #bbdded
+blue = #0088CC
+dark.blue = #00293F
+purple = #815ba4
+pink = #fa00ab
+green = #38fc48
+
+
+####################### i3 BAR #######################
+[bar/i3bar]
+monitor = ${env:MONITOR}
+
+width = 100%
+height = 35
+offset-x = 0
+offset-y = 0
+;bottom = true
+
+# background = #5a000000
+background = ${colors.black}
+foreground = ${colors.grey1}
+
+underline-size = 2
+underline-color = ${colors.grey1}
+
+spacing = 1
+padding-left = 0
+padding-right = 0
+module-margin-left = 0 
+module-margin-right = 0
+
+font-0 = Noto Sans:pixelsize=11;2
+
+# font-0 = Hack:size=10;3
+font-1 = FontAwesome:size=10;2
+# font-2 = siji:pixelsize=10;2
+
+modules-left = i3
+modules-center = playpause spotify
+modules-right = uptime battery0 battery1 backlight volume updates xkeyboard date 
+
+tray-position = right
+
+
+####################### i3 #######################
+[module/i3]
+type = internal/i3
+
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+pin-workspaces = true
+
+label-mode = %mode%
+label-mode-padding = 2
+; label-focused = %index%
+label-focused-padding = 2
+; label-unfocused = %index%
+label-unfocused-padding = 2
+; label-visible = %index%
+label-visible-padding = 2
+; label-urgent = %index%
+label-urgent-padding = 2
+
+label-focused-background = ${colors.dark.blue}
+label-focused-foreground = ${colors.white}
+label-focused-underline= ${colors.blue}
+label-unfocused-foreground = ${colors.grey1}
+label-visible-foreground = ${colors.orange}
+label-urgent-foreground = ${colors.yellow}
+
+# label-focused = %icon%
+# label-focused-background = ${colors.dark}
+# label-focused-underline = ${colors.grey1}
+# label-focused-padding = 4
+
+# label-occupied = %icon%
+# label-occupied-padding = 4
+
+# label-urgent = %icon%
+# label-urgent-padding = 4
+
+# label-empty = %icon%
+# label-empty-foreground = #44ffffff
+# label-empty-padding = 4
+
+####################### DATE #######################
+[module/date]
+type = internal/date
+
+; Seconds to sleep between updates
+interval = 10
+
+; See "man date" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %a %b %d, 
+
+; Optional time format
+time = %H:%M
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+# date-alt = %A, %d %B %Y
+# time-alt = %H:%M:%S
+
+label = %date% %time%
+format =  <label>   
+# format-background = #88000000
+format-foreground = ${colors.yellow}
+format-padding = 2
+
+
+####################### LANG #######################
+[module/xkeyboard]
+type = internal/xkeyboard
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format-prefix = " "
+
+; Available tags:
+;   <label-layout> (default)
+;   <label-indicator> (default)
+format = <label-layout> <label-indicator>
+format-padding = 1
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+label-layout = %layout%
+label-layout-padding = 0
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-indicator = %name%
+label-indicator-padding = 0
+
+
+####################### VOLUME #######################
+[module/volume]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+label-volume = %percentage%
+label-muted =  muted
+label-muted-foreground = #aaa
+format-volume-padding = 2
+format-muted-padding = 2
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
+
+
+####################### BACKLIGHT #######################
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+format = <ramp><label>
+label = %percentage%%
+format-padding = 1
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+
+####################### BATTERY #######################
+[module/battery0]
+type = internal/battery
+
+full-at = 95
+battery = BAT0
+adapter = AC0
+poll-interval = 60
+
+format-charging = <animation-charging><label-charging>%
+format-discharging = <ramp-capacity><label-discharging>%
+format-full = <ramp-capacity><label-full>%
+label-charging = %percentage%
+label-discharging = %percentage%
+label-full = %percentage%
+format-charging-padding = 2
+format-discharging-padding = 2
+format-full-padding = 2
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/battery1]
+type = internal/battery
+
+full-at = 95
+battery = BAT1
+adapter = AC0
+poll-interval = 60
+
+format-charging = <animation-charging><label-charging>%
+format-discharging = <ramp-capacity><label-discharging>%
+format-full = <ramp-capacity><label-full>%
+label-charging = %percentage%
+label-discharging = %percentage%
+label-full = %percentage%
+format-charging-padding = 2
+format-discharging-padding = 2
+format-full-padding = 2
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+# AVERAGE BATTERY MODULE : waiting for Pull Request #227 (https://github.com/jaagr/polybar/pull/227)
+# [module/avg-battery]
+# type = custom/script
+# exec = "count=$(acpi -b | wc -l); sum=$(acpi -b | egrep -o '[0-9]{1,3}%' | tr -d '%' | xargs -I% echo -n '+%'); echo $(( sum / count ))%"
+# format-prefix = " "  
+# format = "<label>"
+# interval = 30
+
+
+####################### UPDATES #######################
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/updates.sh
+interval = 600
+format-prefix = " "
+click-right = pamac-updater
+click-left = pamac-updater
+format-padding = 2
+
+
+####################### WLAN #######################
+[module/wlan]
+type = internal/network
+
+interface = wlp3s0
+interval = 30
+
+label-connected = " %essid%  " 
+label-disconnected = " Not Connected  "
+# click-right = networkmanager_dmenu &
+
+
+####################### UPTIME #######################
+[module/uptime]
+type = custom/script
+exec = $HOME/.config/polybar/uptime.sh
+interval = 30
+format-prefix = " "
+format = <label>
+format-padding = 2
+
+
+####################### MUSIC #######################
+
+[module/spotify]
+type = custom/script
+interval = 5
+format-prefix = "   "
+format = "<label>"
+exec = $HOME/.config/polybar/spotify.py
+format-foreground = ${colors.green}
+# label =  %output:0:30:%
+click-left = playerctl play-pause
+
+[module/playpause]
+type = custom/script
+exec = $HOME/.config/polybar/spot.sh
+format-padding = 1
+interval = 2
+format = <label>
+click-left = playerctl play-pause
+format-foreground = ${colors.green}
+
+# [module/play]
+# type = custom/script
+# exec = python3 $HOME/.config/polybar/play.py
+# format-padding = 1
+# interval = 2
+# format = <label>
+# click-left = playerctl play
+# format-foreground = ${colors.green}
+
+# [module/next]
+# type = custom/script
+# exec = echo 
+# format-padding = 1
+# format = <label>
+# click-left = playerctl next
+# format-foreground = ${colors.green}
+
+# [module/previous]
+# type = custom/script
+# exec = echo 
+# format-padding = 1
+# format = <label>
+# click-left = playerctl previous
+# format-foreground = ${colors.green}
+
+# [module/pause]
+# type = custom/script
+# exec = python3 $HOME/.config/polybar/pause.py
+# format-padding = 1
+# format = <label>
+# interval = 2
+# click-left = playerctl pause
+# format-foreground = ${colors.green}
+
+
+####################### POWER MENU #######################
+
+[module/powermenu]
+type = custom/menu
+
+label-open =  
+# label-open-background = #000
+label-open-foreground = ${colors.red}
+label-close = cancel
+label-close-foreground = ${colors.red}
+label-open-padding = 2
+label-close-padding = 1
+
+menu-0-0 = lock
+menu-0-0-exec = i3exit lock 
+menu-0-1 = reboot
+menu-0-1-exec = menu-open-1
+menu-0-2 = power off
+menu-0-2-exec = menu-open-2
+menu-0-0-padding = 1
+menu-0-1-padding = 1
+menu-0-2-padding = 1
+
+menu-1-0 = reboot?
+menu-1-0-exec = i3exit reboot
+menu-1-0-padding = 1
+
+menu-2-0 = power off?
+menu-2-0-exec = i3exit shutdown
+menu-2-0-padding = 1
+
+
+####################### SETTINGS #######################
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;format-margin = 0
+
+
+##############################################################
+####################### UNUSED MODULES #######################
+##############################################################
+
+# [module/xwindow]
+# type = internal/xwindow
+# label = %title:0:120:...%
+# label-padding = 4
+
+
+# [module/mpd]
+# type = internal/mpd
+
+# label-offline = mpd is offline
+# format-online = <icon-prev> <toggle> <icon-next> <label-song>
+# format-offline = <label-offline>
+# host = 127.0.0.1
+# port = 6600
+# icon-prev = 
+# icon-stop = 
+# icon-play = 
+# icon-pause = 
+# icon-next = 
+
+# label-song-maxlen = 25
+# label-song-ellipsis = true
+
+# bar-progress-width = 10
+# bar-progress-indicator = |
+# bar-progress-fill = ─
+# bar-progress-empty = ─
+
+# ;;;;;;;;;;
+# ;; MENU ;;
+# ;;;;;;;;;;
+# [module/menu]
+# type = custom/menu
+# format-spacing = 1
+# label-open = "    "
+# label-close = "    "
+# label-close-foreground = ${colors.red}
+# label-separator = " | "
+# # Top level
+# menu-0-0 = " * "
+# menu-0-0-exec = menu-open-1
+# menu-0-1 = "  "
+# menu-0-1-exec = menu-open-2
+# menu-0-2 = "    |"
+# menu-0-2-exec = menu-open-3
+# # 1
+# menu-1-0 = "  "
+# menu-1-0-exec = menu-open-0
+# menu-1-0-foreground = ${colors.red}
+# menu-1-1 = "  "
+# menu-1-1-exec = exo-open --launch WebBrowser
+# menu-1-2 = "  "
+# menu-1-2-exec = exo-open --launch TerminalEmulator
+# menu-1-3 = "    |"
+# menu-1-3-exec = exo-open --launch FileManager
+# # 2
+# menu-2-0 = "  "
+# menu-2-0-exec = menu-open-0
+# menu-2-0-foreground = ${colors.red}
+# menu-2-1 = "  "
+# menu-2-1-exec = termite --exec=pacli &
+# menu-2-2 = "  "
+# menu-2-2-exec = xfce4-settings-manager &
+# menu-2-3 = "    |"
+# menu-2-3-exec = pavucontrol &
+# # 3
+# menu-3-0 = "  "
+# menu-3-0-exec = menu-open-0
+# menu-3-0-foreground = ${colors.red}
+# menu-3-1 = "   "
+# menu-3-1-exec = i3lock-fancy -p -f Ubuntu &
+# menu-3-2 = "   "
+# menu-3-2-exec = systemctl -i reboot
+# menu-3-3 = "      |"
+# menu-3-3-exec = systemctl -i poweroff

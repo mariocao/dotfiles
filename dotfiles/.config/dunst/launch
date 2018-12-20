@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+# Terminate already running bar instances
+killall -q xfce4-notifyd
+killall -q dunst
+
+# Wait until the processes have been shut down
+while pgrep -x xfce4-notifyd >/dev/null; do sleep 1; done
+
+# Launch Dunst with config
+dunst -c $HOME/.config/dunst/dunstrc &
+
+echo "Dunst launched..."

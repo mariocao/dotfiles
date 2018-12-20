@@ -1,0 +1,75 @@
+[options]
+font = SauceCodePro Nerd Font  11
+
+resize_grip = false
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = true
+mouse_autohide = true
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+scrollback_lines = 2000
+search_wrap = true
+geometry = 920x800
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# $BROWSER is used by default
+browser = google-chrome-stable
+
+# word characters used for word selection
+# (default if unset: all graphic non-punctuation/space characters)
+#word_chars = -A-Za-z0-9,./?%&#:_=+@~
+
+[colors]
+# base16 paraiso.dark from terminal.sexy
+
+# special
+foreground      = #f8f8f8
+foreground_bold = #ffffff
+cursor          = #d8d8d8
+cursor_foreground = #000000
+background      = rgba(27, 27, 27, 0.8)
+
+# black
+color0  = #2f1e2e
+color8  = #776e71
+
+
+# red 
+color1  = #e31a1c
+color9  = #e31a1c
+
+# green
+color2  = #38fc48
+color10 = #38fc48
+
+# yellow
+color3  = #ff8700
+color11 = #ff8700
+
+# blue
+# blue 3971ed
+color4  = #3971ed
+color12 = #3971ed
+
+# magenta
+color5  = #a36ac7
+color13 = #a36ac7
+
+# cyan
+color6  = #0de0fc
+color14 = #0de0fc
+
+# white
+color7  = #a39e9b
+color15 = #e7e9db
+
+
