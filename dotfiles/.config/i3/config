@@ -344,6 +344,7 @@ exec --no-startup-id dunst -c $HOME/.config/dunst/launch
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master '5%+' && notify-send --expire-time=2000 "Volume Up"  -i audio-volume-high
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master '5%-' && notify-send --expire-time=2000 "Volume Down"  -i audio-volume-low
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master 'toggle' && notify-send --expire-time=2000 "Volume Toggle"  -i audio-volume-muted
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 
 # requires xorg-xbacklight from aur
 bindsym XF86MonBrightnessUp exec (notify-send --expire-time=2000 "Brightness" -h int:value:$(xbacklight -inc 10 && xbacklight -get) -h string:synchronous: -i weather-clear)
