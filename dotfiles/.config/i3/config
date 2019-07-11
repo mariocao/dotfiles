@@ -103,6 +103,7 @@ mode "$mode_external_pos" {
 }
 bindsym $mod+Shift+m mode "$mode_external_pos"
 
+
 ##########################################
 ############### WORKSPACES ###############
 ##########################################
@@ -395,24 +396,6 @@ exec --no-startup-id "sh -c 'sleep 15; exec keepassxc'"
 ########################################
 
 ### Bar programs {{{
-# Start i3blocks to display a workspace bar
-# bar
-# {
-# 	position top
-# 	status_command i3blocks
-#         i3bar_command i3bar -t
-# 	font pango: SauceCodePro Nerd Font Black 10	
-# 	colors
-# 	{
-#                                     # Border  # Background # Text
-# 		focused_workspace   $elegant  $elegant  $red
-# 		active_workspace    $elegant  $elegant  $orange
-# 		inactive_workspace  $elegant  $elegant 	$silver
-# 		urgent_workspace    $elegant  $elegant  $orange
-# 		background          $elegant
-#     	}
-# }
-### }}}
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch
 
