@@ -36,6 +36,8 @@ conky
 polybar
 # i3 lock screen
 i3lock-fancy
+# Better lock screen
+betterlockscreen
 
 # (To monitor the battery status)`
 acpi
